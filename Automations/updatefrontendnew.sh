@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the Instance ID and path to the .env file
-INSTANCE_ID="i-030da7d31a1dbbffc"
+INSTANCE_ID="i-0c65d0ca8e75a28cd"
 
 # Retrieve the public IP address of the specified EC2 instance
 ipv4_address=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
@@ -10,7 +10,7 @@ ipv4_address=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'R
 file_to_find="../frontend/.env.docker"
 
 # Check the current VITE_API_PATH in the .env file
-current_url=$(cat $file_to_find)
+current_url=$(sed -n "4p"  $file_to_find)
 
 # Update the .env file if the IP address has changed
 if [[ "$current_url" != "VITE_API_PATH=\"http://${ipv4_address}:31100\"" ]]; then
@@ -20,3 +20,4 @@ if [[ "$current_url" != "VITE_API_PATH=\"http://${ipv4_address}:31100\"" ]]; the
         echo "ERROR: File not found."
     fi
 fi
+
