@@ -140,7 +140,7 @@ sudo apt-get install jenkins -y
   eksctl create nodegroup --cluster=wanderlust \
                        --region=us-east-2 \
                        --name=wanderlust \
-                       --node-type=m7i-flex.large \
+                       --node-type=c7i-flex.large \
                        --nodes=2 \
                        --nodes-min=2 \
                        --nodes-max=2 \
